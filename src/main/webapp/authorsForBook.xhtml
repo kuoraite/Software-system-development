@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core">
+<f:view>
+    <h2>Authors for book #{authorsForBook.bookToAssignTo.title}:</h2>
+    <c:if test="#{not empty authorsForBook.bookToAssignTo.publisher.name}">
+        <h3>Publisher: #{authorsForBook.bookToAssignTo.publisher.name}</h3>
+    </c:if>
+
+    <h:dataTable value="#{authorsForBook.booksAuthors}" var="booksAuthor" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{booksAuthor.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:link value="#{booksAuthor.name} #{booksAuthor.surname}" outcome="booksForAuthor?authorId=#{booksAuthor.id}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Choose author:"/>
+        <br/>
+        <h:selectOneMenu value="#{authorsForBook.authorId}" >
+            <f:selectItems value="#{authorsForBook.availableAuthors}" var="author"
+                           itemLabel="#{author.name} #{author.surname}" itemValue="#{author.id}" />
+        </h:selectOneMenu>
+        <br/>
+        <h:commandButton value="Assign author" actionListener="#{authorsForBook.assignAuthor()}"
+                         action="#{'authorsForBook?faces-redirect=true&amp;bookId='.concat(authorsForBook.bookToAssignTo.id)}">
+            <f:param name="bookId" value="#{authorsForBook.bookToAssignTo.id}"/>
+        </h:commandButton>
+    </h:form>
+
+    <br/>
+    <h:button value="Go to publishers page" outcome="index" shape="rect"/>
+    <span style="margin-left: 10px; margin-right: 10px;"> </span>
+    <h:button value="Author creation page" outcome="authors" shape="rect"/>
+</f:view>
+</html>

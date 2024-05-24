@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head/>
+<h:body>
+    <h2>Books for author #{booksForAuthor.authorToAssignTo.name} #{booksForAuthor.authorToAssignTo.surname}:</h2>
+    <h:dataTable value="#{booksForAuthor.assignedBooks}" var="bookForAuthor" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{bookForAuthor.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Title</f:facet>
+            <h:link value="#{bookForAuthor.title}" outcome="authorsForBook?bookId=#{bookForAuthor.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{bookForAuthor.price}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Publisher</f:facet>
+            <h:link value="#{bookForAuthor.publisher.name}" outcome="booksForPublisher?publisherId=#{bookForAuthor.publisher.id}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Select book:"/>
+        <br/>
+        <h:selectOneMenu value="#{booksForAuthor.bookId}" disabled="#{empty books.allBooks}">
+            <f:selectItems value="#{booksForAuthor.availableBooks}" var="book"
+                           itemLabel="#{book.title}" itemValue="#{book.id}" />
+        </h:selectOneMenu>
+        <br/>
+        <h:commandButton value="Assign Book" actionListener="#{booksForAuthor.assignBook()}"
+                         action="#{'booksForAuthor?faces-redirect=true&amp;authorId='.concat(booksForAuthor.authorToAssignTo.id)}">
+            <f:param name="authorId" value="#{booksForAuthor.authorToAssignTo.id}"/>
+        </h:commandButton>
+    </h:form>
+    <br/>
+
+    <h:button value="Go to publishers page" outcome="index" shape="rect"/>
+    <span style="margin-left: 10px; margin-right: 10px;"> </span>
+    <h:button value="Book creation page" outcome="books" shape="rect"/>
+</h:body>
+</html>

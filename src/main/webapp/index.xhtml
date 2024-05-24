@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h2>Publishers:</h2>
+    <h:dataTable value="#{publishers.allPublishers}" var="publisher" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{publisher.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:link value="#{publisher.name}" outcome="booksForPublisher?publisherId=#{publisher.id}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Name:"/>
+        <br/>
+        <h:inputText value="#{publishers.publisherToCreate.name}" required="true" />
+        <br/>
+        <h:commandButton value="Add new publisher" actionListener="#{publishers.createPublisher()}" action="index?faces-redirect=true"/>
+    </h:form>
+
+    <br/>
+    <h:button outcome="books" value="Books"/>
+    <span style="margin-left: 10px; margin-right: 10px;"> </span>
+    <h:button outcome="authors" value="Authors"/>
+</h:body>
+</html>

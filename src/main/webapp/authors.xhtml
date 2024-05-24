@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h2>Authors:</h2>
+    <h:dataTable value="#{authors.allAuthors}" var="author" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{author.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:link value="#{author.name} #{author.surname}" outcome="booksForAuthor?authorId=#{author.id}"/>
+        </h:column>
+    </h:dataTable>
+    <br/>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Name:"/>
+        <br/>
+        <h:inputText value="#{authors.authorToCreate.name}" required="true" />
+        <br/><br/>
+        <h:outputLabel value="Surnname:"/>
+        <br/>
+        <h:inputText value="#{authors.authorToCreate.surname}" required="true" />
+        <br/><br/>
+        <h:commandButton value="Add new author" actionListener="#{authors.createAuthor()}" action="authors?faces-redirect=true"/>
+    </h:form>
+    <br/><br/>
+    <h:button outcome="index" value="Back to publishers page" shape="rect"/>
+</h:body>
+</html>

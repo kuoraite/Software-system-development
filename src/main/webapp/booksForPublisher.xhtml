@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h2>Books for publisher #{booksForPublisher.publisher.name}:</h2>
+    <h:dataTable value="#{booksForPublisher.assignedBooks}" var="bookForPublisher" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{bookForPublisher.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Title</f:facet>
+            <h:link value="#{bookForPublisher.title}" outcome="authorsForBook?bookId=#{bookForPublisher.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{bookForPublisher.price}
+        </h:column>
+        <h:column>
+            <h:form>
+                <h:commandButton value="Delete" actionListener="#{booksForPublisher.removeBook(bookForPublisher.id)}"
+                                 action="#{'booksForPublisher?faces-redirect=true&amp;publisherId='.concat(booksForPublisher.publisher.id)}">
+                <f:param name="publisherId" value="#{booksForPublisher.publisher.id}"/>
+                </h:commandButton>
+            </h:form>
+        </h:column>
+    </h:dataTable>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Select book:"/>
+        <br/>
+        <h:selectOneMenu value="#{booksForPublisher.bookId}" disabled="#{empty books.allBooks}">
+            <f:selectItems value="#{booksForPublisher.availableBooks}" var="book"
+                           itemLabel="#{book.title}" itemValue="#{book.id}" />
+        </h:selectOneMenu>
+        <br/>
+        <h:commandButton value="Assign Book" actionListener="#{booksForPublisher.assignBook()}"
+                         action="#{'booksForPublisher?faces-redirect=true&amp;publisherId='.concat(booksForPublisher.publisher.id)}">
+            <f:param name="publisherId" value="#{booksForPublisher.publisher.id}"/>
+        </h:commandButton>
+    </h:form>
+    <br/>
+
+    <h:button value="Go to publishers page" outcome="index" shape="rect"/>
+</h:body>
+</html>

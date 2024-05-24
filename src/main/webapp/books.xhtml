@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<h:head/>
+<h:body>
+    <h2>Books:</h2>
+    <h:dataTable value="#{books.allBooks}" var="book" border="1" style="border-collapse: collapse;">
+        <h:column>
+            <f:facet name="header">Id</f:facet>
+            #{book.id}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Name</f:facet>
+            <h:link value="#{book.title}" outcome="authorsForBook?bookId=#{book.id}"/>
+        </h:column>
+        <h:column>
+            <f:facet name="header">Price</f:facet>
+            #{book.price}
+        </h:column>
+        <h:column>
+            <f:facet name="header">Publisher</f:facet>
+            <h:link value="#{book.publisher.name}" outcome="booksForPublisher?publisherId=#{book.publisher.id}"/>
+        </h:column>
+    </h:dataTable>
+
+    <h:form style="margin-top: 20px;">
+        <h:outputLabel value="Title:"/>
+        <br/>
+        <h:inputText value="#{books.bookToCreate.title}" required="true" />
+        <br/>
+        <br/>
+        <h:outputLabel value="Price:"/>
+        <br/>
+        <h:inputText value="#{books.bookToCreate.price}" required="true" />
+        <br/><br/>
+        <h:commandButton value="Add new book" actionListener="#{books.createBook()}" action="books?faces-redirect=true"/>
+    </h:form>
+    <br/>
+    <h:button outcome="index" value="Back to publishers page" shape="rect"/>
+</h:body>
+</html>
