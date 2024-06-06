@@ -9,7 +9,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac61f790-4893-4ef9-910c-c4b9c8f50558" name="Changes" comment="" />
+    <list default="true" id="ac61f790-4893-4ef9-910c-c4b9c8f50558" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entities/Author.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entities/Author.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entities/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/entities/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/entities/Publisher.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/AuthorsDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/AuthorsDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/BooksDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/BooksDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/PublishersDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/PublishersDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/rest/BooksController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/rest/BooksController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/Books.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/Books.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/BooksForAuthor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/BooksForAuthor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/BooksForPublisher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/demo1/usecases/BooksForPublisher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/beans.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/booksForAuthor.xhtml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/booksForAuthor.xhtml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -55,12 +69,13 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kuora/Desktop/PSK pvz/java-ee-practice",
+    "last_opened_file_path": "C:/Users/kuora/Desktop/New folder/demo1/src/main/resources/META-INF",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -74,6 +89,7 @@
       <recent name="org.example.demo1.entities" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kuora\Desktop\New folder\demo1\src\main\resources\META-INF" />
       <recent name="C:\Users\kuora\Desktop\New folder\demo1\src\main\resources\mybatis.xml" />
       <recent name="C:\Users\kuora\Desktop\New folder\demo1\src\main\webapp" />
     </key>
@@ -189,10 +205,31 @@
       <workItem from="1713341979880" duration="6801000" />
       <workItem from="1713362211486" duration="228000" />
       <workItem from="1716559666445" duration="8578000" />
+      <workItem from="1716816768470" duration="499000" />
+      <workItem from="1716834529072" duration="4343000" />
+      <workItem from="1716881440105" duration="85000" />
+      <workItem from="1716912473219" duration="17925000" />
+      <workItem from="1716976754665" duration="7644000" />
+      <workItem from="1717667249265" duration="83000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/demo1/persistence/AlternativeBookDAO.java</url>
+          <line>62</line>
+          <properties class="org.example.demo1.persistence.AlternativeBookDAO" method="updateTitle">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -3,8 +3,10 @@ package org.example.demo1.rest;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.demo1.entities.Book;
+import org.example.demo1.interceptors.LoggedInvocation;
 import org.example.demo1.persistence.BooksDAO;
 import org.example.demo1.rest.contracts.BookDto;
+import org.example.demo1.services.BookProcessingService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -13,12 +15,20 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.math.BigDecimal;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Setter
 @Getter
 @ApplicationScoped
 @Path("/books")
 public class BooksController {
+
+    @Inject
+    private BookProcessingService bookProcessingService;
+
+    private CompletableFuture<Void> bookProcessingTask = null;
 
     @Inject
     private BooksDAO booksDAO;
@@ -42,6 +52,7 @@ public class BooksController {
 
     @POST
     @Transactional
+    @LoggedInvocation
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response createBook(BookDto bookDto) {
@@ -58,6 +69,7 @@ public class BooksController {
     @Path("/{id}")
     @PUT
     @Transactional
+    @LoggedInvocation
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response update(@PathParam("id") final Long bookId, BookDto bookDto) {
@@ -75,5 +87,27 @@ public class BooksController {
         } catch (OptimisticLockException ole) {
             return Response.status(Response.Status.CONFLICT).build();
         }
+    }
+
+    @Path("/process")
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response processBookAsync(BookDto bookDto) {
+        bookProcessingTask = CompletableFuture.runAsync(() -> bookProcessingService.processBook());
+
+        return Response.accepted().entity("Book processing started").build();
+    }
+
+    @Path("/process/status")
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getBookProcessingStatus(){
+        if (bookProcessingTask == null) {
+            return "No book processing task started";
+        } else if (!bookProcessingTask.isDone()) {
+            return "Book processing in progress";
+        }
+        return "Book processing completed";
     }
 }

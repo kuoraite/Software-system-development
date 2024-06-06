@@ -4,20 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 import org.example.demo1.entities.Author;
 import org.example.demo1.entities.Book;
+import org.example.demo1.interceptors.LoggedInvocation;
 import org.example.demo1.persistence.AuthorsDAO;
 import org.example.demo1.persistence.BooksDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
+import javax.persistence.OptimisticLockException;
 import javax.transaction.Transactional;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-@Model
-public class BooksForAuthor {
+@ViewScoped
+@Named
+public class BooksForAuthor implements Serializable {
 
     @Inject
     private AuthorsDAO authorsDAO;
@@ -39,6 +45,9 @@ public class BooksForAuthor {
 
     @Getter @Setter
     private long bookId;
+
+    @Getter @Setter
+    private String errorMessage;
 
     @PostConstruct
     public void init() {
@@ -74,5 +83,15 @@ public class BooksForAuthor {
         }
 
         return availableBooks;
+    }
+
+    @Transactional
+    @LoggedInvocation
+    public void updateAuthorName(){
+        try{
+            authorsDAO.update(authorToAssignTo);
+        } catch (OptimisticLockException ole){
+            errorMessage = "Optimistic lock exception: " + ole;
+        }
     }
 }

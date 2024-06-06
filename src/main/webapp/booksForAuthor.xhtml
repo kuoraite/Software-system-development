@@ -8,6 +8,18 @@
 <h:head/>
 <h:body>
     <h2>Books for author #{booksForAuthor.authorToAssignTo.name} #{booksForAuthor.authorToAssignTo.surname}:</h2>
+
+    <h:form>
+        <f:facet name="header">Update author name</f:facet>
+        <h:inputText value="#{booksForAuthor.authorToAssignTo.name}" required="true" />
+        <h:commandButton value="Update author name"
+                         actionListener="#{booksForAuthor.updateAuthorName()}">
+            <f:param name="authorId" value="#{booksForAuthor.authorToAssignTo.id}"/>
+        </h:commandButton>
+        <h:outputText value="#{booksForAuthor.errorMessage}" rendered="#{not empty booksForAuthor.errorMessage}"/>
+
+    </h:form>
+
     <h:dataTable value="#{booksForAuthor.assignedBooks}" var="bookForAuthor" border="1" style="border-collapse: collapse;">
         <h:column>
             <f:facet name="header">Id</f:facet>

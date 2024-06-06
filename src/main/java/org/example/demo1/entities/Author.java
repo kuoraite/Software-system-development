@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Setter
@@ -13,7 +14,11 @@ import java.util.List;
         @NamedQuery(name = "Author.findAll", query = "select a from Author as a")
 })
 @Table(name = "AUTHOR")
-public class Author {
+public class Author implements Serializable {
+
+    @Version
+    private Integer version;
+
     @Id
     @GeneratedValue
     private Long id;

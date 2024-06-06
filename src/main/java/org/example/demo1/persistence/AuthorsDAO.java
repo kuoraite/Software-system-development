@@ -2,6 +2,7 @@ package org.example.demo1.persistence;
 
 import lombok.Setter;
 import org.example.demo1.entities.Author;
+import org.example.demo1.entities.Publisher;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
